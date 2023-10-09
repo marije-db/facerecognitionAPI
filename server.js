@@ -6,9 +6,9 @@ const knex = require('knex')({
         connection: {
             host : 'dpg-cki73dke1qns73da1ba0-a',
             port : 5432,
-            user : 'postgres',
+            user : 'database_zy2o_user',
             password : 'marijedevDB',
-            database : 'face-recognition'
+            database : 'database_zy2o'
     }
 });
 const register = require('./controllers/register');
