@@ -4,13 +4,13 @@ const cors = require('cors');
 const knex = require('knex')({
         client: 'pg',
         connection: {
-            connectionString : process_env.DATABASE_URL,
+            connectionString : process.env.DATABASE_URL,
             ssl: {rejectUnauthorized: false},
             port : 5432,
-            host: process_env.DATABASE_HOST,
-            user: process_env.DATABASE_USER,
-            password: process_env.DATABASE_PW,
-            database: proces_env.DATABASE_DB
+            host: process.env.DATABASE_HOST,
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PW,
+            database: proces.env.DATABASE_DB
     }
 });
 const register = require('./controllers/register.js');
