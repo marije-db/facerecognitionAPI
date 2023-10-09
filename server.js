@@ -10,7 +10,7 @@ const knex = require('knex')({
             host: process.env.DATABASE_HOST,
             user: process.env.DATABASE_USER,
             password: process.env.DATABASE_PW,
-            database: proces.env.DATABASE_DB
+            database: process.env.DATABASE_DB
     }
 });
 const register = require('./controllers/register.js');
