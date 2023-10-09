@@ -13,10 +13,11 @@ const knex = require('knex')({
             database: proces_env.DATABASE_DB
     }
 });
-const register = require('./controllers/register');
-const signin = require('./controllers/signin');
-const profile = require('./controllers/profile');
-import {handleAPIcall, getImage} from './controllers/image.js';
+const register = require('./controllers/register.js');
+const signin = require('./controllers/signin.js');
+const profile = require('./controllers/profile.js');
+const image = require('./controllers/image.js')
+import handleAPIcall from './controllers/image.js';
 
 
 
@@ -32,7 +33,7 @@ app.all('/', (req, res) => {
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt)})
 app.post('/register', (req, res) => {register.handleRegister(req, res, knex, bcrypt)})
 app.get('/profile/:id', (req, res) => {profile.getProfile(req, res, knex)})
-app.put('/image', (req, res) => {getImage(req, res, knex)})
+app.put('/image', (req, res) => {image.getImage(req, res, knex)})
 app.post('/imageurl', (req, res) => {handleAPIcall(req, res)})
 
 
