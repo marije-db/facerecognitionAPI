@@ -56,7 +56,9 @@ const getImage = (req, res, knex) => {
         .catch(err => res.status(400).json('Unable to get entries'))
 }
 
-module.exports = {
-    getImage: getImage,
-    handleAPIcall, handleAPIcall
-}
+// module.exports = {
+//     getImage: getImage,
+//     handleAPIcall, handleAPIcall
+// }
+
+export default {handleAPIcall , getImage}

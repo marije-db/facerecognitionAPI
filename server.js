@@ -4,17 +4,19 @@ const cors = require('cors');
 const knex = require('knex')({
         client: 'pg',
         connection: {
-            host : 'dpg-cki73dke1qns73da1ba0-a',
+            connectionString : process_env.DATABASE_URL,
+            ssl: {rejectUnauthorized: false},
             port : 5432,
-            user : 'database_zy2o_user',
-            password : 'marijedevDB',
-            database : 'database_zy2o'
+            host: process_env.DATABASE_HOST,
+            user: process_env.DATABASE_USER,
+            password: process_env.DATABASE_PW,
+            database: proces_env.DATABASE_DB
     }
 });
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
-const image = require('./controllers/image');
+import {handleAPIcall, getImage} from './controllers/image'
 
 
 
@@ -30,8 +32,8 @@ app.all('/', (req, res) => {
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt)})
 app.post('/register', (req, res) => {register.handleRegister(req, res, knex, bcrypt)})
 app.get('/profile/:id', (req, res) => {profile.getProfile(req, res, knex)})
-app.put('/image', (req, res) => {image.getImage(req, res, knex)})
-app.post('/imageurl', (req, res) => {image.handleAPIcall(req, res)})
+app.put('/image', (req, res) => {getImage(req, res, knex)})
+app.post('/imageurl', (req, res) => {handleAPIcall(req, res)})
 
 
 app.listen(process.env.PORT || 3000, () => {
