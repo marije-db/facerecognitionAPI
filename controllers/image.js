@@ -58,6 +58,5 @@ const getImage = (req, res, knex) => {
 
 module.exports = {
     getImage: getImage,
+    handleAPIcall, handleAPIcall
 }
-
-export default {handleAPIcall , getImage}

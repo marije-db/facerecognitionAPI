@@ -17,7 +17,6 @@ const register = require('./controllers/register.js');
 const signin = require('./controllers/signin.js');
 const profile = require('./controllers/profile.js');
 const image = require('./controllers/image.js')
-import handleAPIcall from './controllers/image.js';
 
 
 
@@ -34,7 +33,7 @@ app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt)}
 app.post('/register', (req, res) => {register.handleRegister(req, res, knex, bcrypt)})
 app.get('/profile/:id', (req, res) => {profile.getProfile(req, res, knex)})
 app.put('/image', (req, res) => {image.getImage(req, res, knex)})
-app.post('/imageurl', (req, res) => {handleAPIcall(req, res)})
+app.post('/imageurl', (req, res) => {image.handleAPIcall(req, res)})
 
 
 app.listen(process.env.PORT || 3000, () => {
