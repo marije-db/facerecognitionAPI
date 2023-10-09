@@ -41,7 +41,7 @@ const handleAPIcall = (req, res) => {
       .then((result) => {
         res.json(result);
       })
-      .catch((err) => res.status(500).json("Unable to communicate with API"));
+      .catch((err) => res.status(400).json("Unable to communicate with API"));
   };
 
 
