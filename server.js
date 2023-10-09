@@ -4,7 +4,7 @@ const cors = require('cors');
 const knex = require('knex')({
         client: 'pg',
         connection: {
-            host : '127.0.0.1',
+            host : 'dpg-cki73dke1qns73da1ba0-a',
             port : 5432,
             user : 'postgres',
             password : 'marijedevDB',
@@ -35,5 +35,5 @@ app.post('/imageurl', (req, res) => {image.handleAPIcall(req, res)})
 
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log(`app is running on port ${process.env.PORT}`)
+    console.log(`app is running on port ${process.env.PORT || 3000}`)
 })
