@@ -1,6 +1,6 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const cors = require('cors');
+import express, { json } from 'express';
+import bcrypt from 'bcryptjs';
+import cors from 'cors';
 const knex = require('knex')({
         client: 'pg',
         connection: {
@@ -13,27 +13,27 @@ const knex = require('knex')({
             database: process.env.DATABASE_DB
     }
 });
-const register = require('./controllers/register.js');
-const signin = require('./controllers/signin.js');
-const profile = require('./controllers/profile.js');
-const image = require('./controllers/image.js')
+import { handleRegister } from './controllers/register.js';
+import { handleSignin } from './controllers/signin.js';
+import { getProfile } from './controllers/profile.js';
+import { getImage, handleAPIcall } from './controllers/image.js';
 
 
 
 const app = express();
 
-app.use(express.json())
+app.use(json())
 app.use(cors())
 
 app.all('/', (req, res) => {
     res.send(knex('users'))
 })
 
-app.post('/signin', (req, res) => { signin.handleSignin(req, res, knex, bcrypt)})
-app.post('/register', (req, res) => {register.handleRegister(req, res, knex, bcrypt)})
-app.get('/profile/:id', (req, res) => {profile.getProfile(req, res, knex)})
-app.put('/image', (req, res) => {image.getImage(req, res, knex)})
-app.post('/imageurl', (req, res) => {image.handleAPIcall(req, res)})
+app.post('/signin', (req, res) => { handleSignin(req, res, knex, bcrypt)})
+app.post('/register', (req, res) => {handleRegister(req, res, knex, bcrypt)})
+app.get('/profile/:id', (req, res) => {getProfile(req, res, knex)})
+app.put('/image', (req, res) => {getImage(req, res, knex)})
+app.post('/imageurl', (req, res) => {handleAPIcall(req, res)})
 
 
 app.listen(process.env.PORT || 3000, () => {

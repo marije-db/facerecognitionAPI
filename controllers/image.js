@@ -34,7 +34,7 @@ const clarifaiRequestOptions = (imgUrl) => {
     return requestOptions
   }
 
-const handleAPIcall = (req, res) => {
+export const handleAPIcall = (req, res) => {
     fetch(
       `https://api.clarifai.com/v2/models/face-detection/outputs`,
       clarifaiRequestOptions(req.body.input)
@@ -47,7 +47,7 @@ const handleAPIcall = (req, res) => {
   };
 
 
-const getImage = (req, res, knex) => {
+export const getImage = (req, res, knex) => {
     const { id } = req.body;
     knex('users').where('id', '=', id)
         .increment('entries', 1)
@@ -56,9 +56,4 @@ const getImage = (req, res, knex) => {
             res.json(entries[0].entries)
         })
         .catch(err => res.status(400).json('Unable to get entries'))
-}
-
-module.exports = {
-    getImage: getImage,
-    handleAPIcall, handleAPIcall
 }

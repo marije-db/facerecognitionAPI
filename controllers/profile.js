@@ -1,4 +1,4 @@
-const getProfile = (req, res, knex) => {
+export const getProfile = (req, res, knex) => {
     const { id } = req.params;
     knex.select('*').from('users').where({
         id: id
@@ -11,8 +11,4 @@ const getProfile = (req, res, knex) => {
         }
     })
     .catch(err => res.status(400).json('Error getting user'))
-}
-
-module.exports = {
-    getProfile : getProfile
 }
