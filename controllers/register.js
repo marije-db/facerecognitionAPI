@@ -1,11 +1,11 @@
-export const handleRegister = (req, res, knex, bcrypt) => {
+export const handleRegister = (req, res, db, bcrypt) => {
     const {email, name, password} = req.body;
     if(!email || !name || !password){
         return res.status(400).json('Incorrect form submission')
     }
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    knex.transaction(trx => {
+    db.transaction(trx => {
         trx.insert({
             hash: hash,
             email: email

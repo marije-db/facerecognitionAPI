@@ -1,7 +1,9 @@
 import express, { json } from 'express';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
-const knex = require('knex')({
+import knex from 'knex'
+
+const db = knex({
         client: 'pg',
         connection: {
             connectionString : process.env.DATABASE_URL,
@@ -26,13 +28,13 @@ app.use(json())
 app.use(cors())
 
 app.all('/', (req, res) => {
-    res.send(knex('users'))
+    res.send(db('users'))
 })
 
-app.post('/signin', (req, res) => { handleSignin(req, res, knex, bcrypt)})
-app.post('/register', (req, res) => {handleRegister(req, res, knex, bcrypt)})
-app.get('/profile/:id', (req, res) => {getProfile(req, res, knex)})
-app.put('/image', (req, res) => {getImage(req, res, knex)})
+app.post('/signin', (req, res) => { handleSignin(req, res, db, bcrypt)})
+app.post('/register', (req, res) => {handleRegister(req, res, db, bcrypt)})
+app.get('/profile/:id', (req, res) => {getProfile(req, res, db)})
+app.put('/image', (req, res) => {getImage(req, res, db)})
 app.post('/imageurl', (req, res) => {handleAPIcall(req, res)})
 
 

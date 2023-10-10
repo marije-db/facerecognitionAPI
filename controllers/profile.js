@@ -1,6 +1,6 @@
-export const getProfile = (req, res, knex) => {
+export const getProfile = (req, res, db) => {
     const { id } = req.params;
-    knex.select('*').from('users').where({
+    db.select('*').from('users').where({
         id: id
     })
     .then(user => {
