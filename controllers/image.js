@@ -47,9 +47,9 @@ export const handleAPIcall = (req, res) => {
   };
 
 
-export const getImage = (req, res, knex) => {
+export const getImage = (req, res, db) => {
     const { id } = req.body;
-    knex('users').where('id', '=', id)
+    db('users').where('id', '=', id)
         .increment('entries', 1)
         .returning('entries')
         .then(entries => {
